@@ -8,7 +8,7 @@ function WeatherHightlights () {
                     <p className=" text-4xl"><span className="text-6xl font-bold">0.97</span>ms</p>
                     <div className="flex justify-center items-center gap-4">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" className="w-9 bg-textlight rounded-full fill-seclight p-2"><path d="m190-120-30-30 320-730 320 730-30 30-290-132-290 132Z"/></svg>
-                        <p >NNE</p>
+                        <p>NNE</p>
                     </div>
                 </div>
                 <div className="bg-bglight dark:bg-secdark flex flex-col items-center justify-center gap-5 py-5">

@@ -1,12 +1,47 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 function WeatherToday () {
     function toggleDarkMode (){
         document.documentElement.classList.toggle("dark")
     }
+    const [data, setData] = useState(null)
+    const [loading, setLoading] = useState(false)
+    const IPINFO_TOKEN = import.meta.env.VITE_IPINFO_TOKEN 
+    const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY 
+
+    useEffect(()=> {
+        async function fetchAllData() {
+        setLoading(true)
+        try{
+            const ipInfoAnswer = await fetch(`https://ipinfo.io/json?token=${IPINFO_TOKEN}`)
+            const location = await ipInfoAnswer.json()
+            const [latitude, longitude] = location.loc.split(",")
+            const weatherAnswer =  await fetch(
+                `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${WEATHER_API_KEY}&units=metric&lang=es`
+            )
+            const weatherData = await weatherAnswer.json()
+            setData(weatherData)
+            setLoading(false)
+        }catch (error){
+            console.log(error)
+        }
+        }
+        fetchAllData()
+    }, [])
+
+    const today = data 
+        ? new Date(data.dt *1000).toLocaleDateString("es-ES", {
+        day: "numeric", month: "short"}) : ""
+
+    if (loading || !data)  {
+        return(
+            <>cargando</>
+        )
+    }
 
     return(
         <aside className="flex flex-col gap-10 bg-bglight dark:bg-secdark/95 md:w-[40%]  xl:h-screen">
+            {console.log(data)}
             <div className="bg-[url('/images/others/Cloud-background.png')] bg-center bg-no-repeat flex flex-col items-center justify-center h-[50%]">
             <header className="w-full flex items-center justify-between p-5">
                 <button className="bg-button text-textlight dark:text-texttdark font-semibold px-4 py-2 rounded-xs hover:ring-1 ring-white">Search for Places</button>
@@ -32,18 +67,18 @@ function WeatherToday () {
                     </div>
                 </div>
             </header>
-            <img src="/images/weather/10n.png" alt="weather icon"  className="w-40 my-20"/>
+            <img src={`/images/weather/${data.weather[0].icon}.png`} alt="weather icon"  className="w-40 my-20"/>
             </div>
             <section className="flex flex-col justify-center items-center gap-15 pb-20">
-                <p className="text-6xl font-bold text-textlight dark:text-texttdark"><span className="text-8xl">25</span> °C</p>
+                <p className="text-6xl font-bold text-textlight dark:text-texttdark"><span className="text-8xl">{data.main.temp}</span> °C</p>
                 <ul className="flex flex-col gap-5 items-center justify-center">
-                    <li className="text-2xl font-bold text-textlight dark:text-texttdark/60">Light Rain</li>
-                    <li className="text-lg font-bold text-textlight dark:text-texttdark/60">Today . Mon 6 Apr</li>
+                    <li className="text-2xl font-bold text-textlight dark:text-texttdark/60">{data.weather[0].description}</li>
+                    <li className="text-lg font-bold text-textlight dark:text-texttdark/60">Today .{today}</li>
                     <li className="flex font-bold text-textlight dark:text-texttdark/60">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" className="fill-textlight w-6">
                             <path d="M480.089-490Q509-490 529.5-510.589q20.5-20.588 20.5-49.5Q550-589 529.411-609.5q-20.588-20.5-49.5-20.5Q451-630 430.5-609.411q-20.5 20.588-20.5 49.5Q410-531 430.589-510.5q20.588 20.5 49.5 20.5ZM480-159q133-121 196.5-219.5T740-552q0-117.79-75.292-192.895Q589.417-820 480-820t-184.708 75.105Q220-669.79 220-552q0 75 65 173.5T480-159Zm0 79Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/>
                         </svg>
-                        <span>Guatemala City</span>
+                        <span>{data.name}</span>
                     </li>
                 </ul>
             </section>
