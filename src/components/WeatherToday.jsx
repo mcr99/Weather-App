@@ -6,11 +6,11 @@ function WeatherToday () {
     }
 
     return(
-        <aside className="bg-[url('/images/others/Cloud-background.png')] bg-center bg-no-repeat bg-bglight flex flex-col gap-10">
-            <div className="w-full h-full absolute bg-textlight/30 border hidden dark:block"></div>
-            <header className="flex items-center justify-between p-5">
-                <button className="bg-button text-textlight font-semibold px-4 py-2 rounded-xs z-10">Search for Places</button>
-                <div className="flex z-10 gap-2" >
+        <aside className="flex flex-col gap-10 bg-bglight dark:bg-secdark/95 md:w-[40%]  xl:h-screen">
+            <div className="bg-[url('/images/others/Cloud-background.png')] bg-center bg-no-repeat flex flex-col items-center justify-center h-[50%]">
+            <header className="w-full flex items-center justify-between p-5">
+                <button className="bg-button text-textlight dark:text-texttdark font-semibold px-4 py-2 rounded-xs hover:ring-1 ring-white">Search for Places</button>
+                <div className="flex gap-2" >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"  className="w-11 p-2 bg-button rounded-full fill-texttdark hover:fill-white hover:ring-1 ring-white">
                         <path d="M444-22v-82q-139-15-232.5-108T103-444H21v-73h82q15-139 108.5-232.5T444-859v-82h73v82q138 16 231.5 109.5T858-517h82v73h-82q-16 139-109.5 232T517-104v82h-73Zm37-154q126 0 215.5-89T786-481q0-127-89.5-216.5T481-787q-127 0-216.5 89.5T175-481q0 127 89.5 216T481-176Zm0-141q-69 0-116.5-47.5T317-481q0-69 47.5-116.5T481-645q68 0 116 47.5T645-481q0 69-48 116.5T481-317Z"/>
                     </svg>
@@ -31,15 +31,15 @@ function WeatherToday () {
                         </svg>
                     </div>
                 </div>
-
             </header>
-            <section className="flex flex-col justify-center items-center gap-25 pb-20">
-                <img src="/images/weather/10n.png" alt="weather icon"  className="w-35 z-10"/>
-                <p className="text-6xl font-bold text-textlight"><span className="text-8xl">25</span> °C</p>
-                <ul className="flex flex-col gap-5">
-                    <li className="text-2xl font-bold text-textlight">Light Rain</li>
-                    <li className="text-lg font-bold text-textlight">Today . Mon 6 Apr</li>
-                    <li className="flex font-bold text-textlight">
+            <img src="/images/weather/10n.png" alt="weather icon"  className="w-40 my-20"/>
+            </div>
+            <section className="flex flex-col justify-center items-center gap-15 pb-20">
+                <p className="text-6xl font-bold text-textlight dark:text-texttdark"><span className="text-8xl">25</span> °C</p>
+                <ul className="flex flex-col gap-5 items-center justify-center">
+                    <li className="text-2xl font-bold text-textlight dark:text-texttdark/60">Light Rain</li>
+                    <li className="text-lg font-bold text-textlight dark:text-texttdark/60">Today . Mon 6 Apr</li>
+                    <li className="flex font-bold text-textlight dark:text-texttdark/60">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" className="fill-textlight w-6">
                             <path d="M480.089-490Q509-490 529.5-510.589q20.5-20.588 20.5-49.5Q550-589 529.411-609.5q-20.588-20.5-49.5-20.5Q451-630 430.5-609.411q-20.5 20.588-20.5 49.5Q410-531 430.589-510.5q20.588 20.5 49.5 20.5ZM480-159q133-121 196.5-219.5T740-552q0-117.79-75.292-192.895Q589.417-820 480-820t-184.708 75.105Q220-669.79 220-552q0 75 65 173.5T480-159Zm0 79Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/>
                         </svg>
