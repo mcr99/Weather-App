@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
+import { useWeather } from "../context/useWeatherContext"
 
 function WeatherToday () {
+    const {unit, convert} = useWeather()
     function toggleDarkMode (){
         document.documentElement.classList.toggle("dark")
     }
@@ -41,7 +43,6 @@ function WeatherToday () {
 
     return(
         <aside className="flex flex-col gap-10 bg-bglight dark:bg-secdark/95 md:w-[40%]  xl:h-screen">
-            {console.log(data)}
             <div className="bg-[url('/images/others/Cloud-background.png')] bg-center bg-no-repeat flex flex-col items-center justify-center h-[50%]">
             <header className="w-full flex items-center justify-between p-5">
                 <button className="bg-button text-textlight dark:text-texttdark font-semibold px-4 py-2 rounded-xs hover:ring-1 ring-white">Search for Places</button>
@@ -70,7 +71,7 @@ function WeatherToday () {
             <img src={`/images/weather/${data.weather[0].icon}.png`} alt="weather icon"  className="w-40 my-20"/>
             </div>
             <section className="flex flex-col justify-center items-center gap-15 pb-20">
-                <p className="text-6xl font-bold text-textlight dark:text-texttdark"><span className="text-8xl">{data.main.temp}</span> °C</p>
+                <p className="text-6xl font-bold text-textlight dark:text-texttdark"><span className="text-8xl">{convert(data.main.temp)}</span> °{unit}</p>
                 <ul className="flex flex-col gap-5 items-center justify-center">
                     <li className="text-2xl font-bold text-textlight dark:text-texttdark/60">{data.weather[0].description}</li>
                     <li className="text-lg font-bold text-textlight dark:text-texttdark/60">Today .{today}</li>
